@@ -21,8 +21,23 @@ int main()
 		std::cin >> age;
 	}
 
-	std::cout << "Hello " << name << "." << std::endl
-			  << "You are " << age << " years old" << std::endl;
+	//Advanced
+
+	if (age < 25)
+	{
+		std::cout << "Hello " << name << ","
+			<< " you are only " << age << " years old" << std::endl;
+	}
+	else if (age > 25 && age < 50)
+	{
+		std::cout << "Hello " << name << ","
+			<< " you are already " << age << " years old" << std::endl;
+	}
+	else if (age > 50)
+	{
+		std::cout << "Hello " << name << "." << std::endl
+			<< "You are a very wise for your age." << std::endl;
+	}
 
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
