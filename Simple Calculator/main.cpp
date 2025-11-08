@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
 
-int safeDivision(int& divident, int divisor)
+int safeDivision(float& divident, float divisor)
 {
-	if (divisor == 0)
+	if (divisor == 0.f)
 	{
 		std::cout << "ERROR: division it not valid\n";
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -44,12 +44,12 @@ int checkForNextNumber()
 	return 0;
 }
 
-int checkForFutherMultiplicationOrDivisionSigns(int& value)
+int checkForFutherMultiplicationOrDivisionSigns(float& value)
 {
 	while (std::cin.peek() != '\n' && std::cin.peek() != '+' && std::cin.peek() != '-')
 	{
 		char sign_ = ' ';
-		int num_ = 0;
+		float num_ = 0.f;
 
 		std::cin >> sign_;
 		if (checkForWrongInput() == 1) return 1;
@@ -87,7 +87,7 @@ int checkForFutherMultiplicationOrDivisionSigns(int& value)
 
 int calculator()
 {
-	std::vector<int> numbers;
+	std::vector<float> numbers;
 
 	std::cout << "Enter your expression: ";
 
@@ -95,7 +95,7 @@ int calculator()
 
 	while (std::cin.peek() != '\n')
 	{
-		int value = 0;
+		float value = 0.f;
 		char sign = ' ';
 
 		std::cin >> value;
@@ -111,13 +111,13 @@ int calculator()
 		//If there was a '-' before a value then reverse it
 		if (isNextValueNegative)
 		{
-			value *= -1;
+			value *= -1.f;
 			isNextValueNegative = false;
 		}
 
 
 		//Read sign after a number
-		int temp = 0;
+		float temp = 0;
 		switch (sign)
 		{
 		case '+':
@@ -174,7 +174,7 @@ int calculator()
 	}
 
 	//Sum up all the values in the vector
-	int value = 0;
+	float value = 0;
 	for (auto& number : numbers)
 	{
 		value += number;
