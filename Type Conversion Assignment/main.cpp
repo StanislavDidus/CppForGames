@@ -13,5 +13,14 @@ int main()
 		      << "Int:"     << i << "\n"
 		      << "Char: "   << c << "\n"
 		      << "Bool: "   << b << "\n";
-	return 0;
+
+	std::cout << static_cast<int>('!') << "\n";
+	auto v = '!' + 15;
+
+	char five_char = '9';
+	int five_int = static_cast<int>(five_char) - 48;
+
+	std::cout << five_int << "\n";
+
+	return 0;	
 }
