@@ -57,7 +57,7 @@ int main()
 		char sign = ' ';
 
 		//If the incoming symbols is an operand, print it..
-		if (expression[i] >= '0' && expression[i] <= '9')
+		if (isNumber(expression[i]) || expression[i] == '.')
 		{
 			std::string num = "";
 
@@ -66,7 +66,7 @@ int main()
 			{
 				num += expression[nextSymbol];
 				nextSymbol++;
-			} while (nextSymbol < expression.length() && isNumber(expression[nextSymbol]));
+			} while (nextSymbol < expression.length() && (isNumber(expression[nextSymbol]) || expression[nextSymbol] == '.'));
 
 			number = std::stof(num);
 
