@@ -24,6 +24,11 @@ constexpr bool isNumber(char c) noexcept
 	return c >= '0' && c <= '9';
 }
 
+constexpr bool isLetter(char c) noexcept
+{
+	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
 //The Shunting Yard Algorithm https://mathcenter.oxford.emory.edu/site/cs171/shuntingYardAlgorithm/
 int main()
 {
@@ -56,14 +61,33 @@ int main()
 		float number = 0.f;
 		char sign = ' ';
 
+		//If letter - return error
+		if (isLetter(expression[i]))
+		{
+			std::cout << "ERROR: wrong syntax\n";
+			return 1;
+		}
+
 		//If the incoming symbols is an operand, print it..
-		if (isNumber(expression[i]) || expression[i] == '.')
+		if (isNumber(expression[i]))
 		{
 			std::string num = "";
+			bool floatingPoint = false;
 
 			int nextSymbol = i;
 			do
 			{
+				// '.' is encountered more that 1 time - display error
+				if (floatingPoint && expression[nextSymbol] == '.')
+				{
+					std::cout << "ERROR: wrong syntax\n";
+					return 1;
+				}
+				if (expression[nextSymbol] == '.')
+				{
+					floatingPoint = true;
+				}
+
 				num += expression[nextSymbol];
 				nextSymbol++;
 			} while (nextSymbol < expression.length() && (isNumber(expression[nextSymbol]) || expression[nextSymbol] == '.'));
@@ -97,13 +121,6 @@ int main()
 			v.isSign = true;
 			//last_value = v;
 
-			//Check for - unary
-			//if (sign == '-' && (std::cin.peek() == '(' || last_value.isSign))
-			{
-				//sign_stack.push('&');
-				//break;
-			}
-
 			//If the incoming symbol is a left parenthesis, push it on the stack.
 			if (sign == '(')
 			{
@@ -114,7 +131,8 @@ int main()
 			// Pop the left parenthesis and discard it.
 			else if (sign == ')')
 			{
-				while (sign_stack.top() != '(')
+				//Check if left paranthese is on the stack
+				while (!sign_stack.empty() && sign_stack.top() != '(')
 				{
 					char symbol = sign_stack.top();
 					sign_stack.pop();
@@ -124,8 +142,9 @@ int main()
 					v.isSign = true;
 					end_vector.push_back(v);
 				}
+
 				//Pop the left paranthese
-				sign_stack.pop();
+				if (!sign_stack.empty() && sign_stack.top() == '(') sign_stack.pop();
 			}
 			//If an operator
 			else if (isOperator(sign))
@@ -164,11 +183,19 @@ int main()
 					sign_stack.push(sign);
 				}
 			}
+			//If not any of the given operators return error
+			else
+			{
+				std::cout << "ERROR: wrong syntax\n";
+				return 1;
+			}
 		}
 	}
 	//Add all operators that are left to the end_vector
 	while (!sign_stack.empty())
 	{
+		if (sign_stack.top() == '(') { sign_stack.pop(); continue; }
+
 		char sign = sign_stack.top();
 		sign_stack.pop();
 
@@ -177,21 +204,6 @@ int main()
 		v.isSign = true;
 		end_vector.push_back(v);
 	}
-
-	std::cout << "RPN: ";
-	for (const auto& n : end_vector)
-	{
-		if (!n.isSign)
-		{
-			std::cout << n.number;
-		}
-		else
-		{
-			std::cout << n.sign;
-		} 
-		std::cout << " ";
-	}
-
 
 	std::stack<Value> result_stack;
 	for (auto it = end_vector.begin(); it != end_vector.end(); ++it)
@@ -219,9 +231,19 @@ int main()
 				result = v2 * v1;
 				break;
 			case '/':
+				if (v1 == 0)
+				{
+					std::cout << "ERROR: division by 0 is not possible\n";
+					return 1;
+				}
 				result = v2 / v1;
 				break;
 			case '%':
+				if (v1 == 0)
+				{
+					std::cout << "ERROR: modulo of 0 is not possible\n";
+					return 1;
+				}
 				result = std::fmodf(v2, v1);
 				break;
 			case '^':
@@ -249,6 +271,20 @@ int main()
 			result_stack.push(v);
 		}
 		
+	}
+
+	std::cout << "RPN: ";
+	for (const auto& n : end_vector)
+	{
+		if (!n.isSign)
+		{
+			std::cout << n.number;
+		}
+		else
+		{
+			std::cout << n.sign;
+		}
+		std::cout << " ";
 	}
 
 	std::cout << std::endl << "Result is: " << result_stack.top().number << std::endl;
