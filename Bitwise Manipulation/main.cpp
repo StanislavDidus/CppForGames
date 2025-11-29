@@ -75,7 +75,7 @@ int main()
 
 	std::cout << "----------------------------------------------" << std::endl;
 
-	bool is_bit_set = value >> (7 - bit_position) & 0b00000001;
+	bool is_bit_set = value >> bit_position & 0b00000001;
 
 	if(is_bit_set)	std::cout << "Bit <" << static_cast<int>(bit_position) << "> is set: true" << std::endl;
 	else std::cout << "Bit <" << static_cast<int>(bit_position) << "> is set: false" << std::endl;
@@ -84,8 +84,7 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 1;
-		mask = mask << (7 - bit_position);
+		uint8_t mask = 1 << bit_position;
 		v = v | mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is set" << std::endl;
@@ -97,8 +96,7 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 1;
-		mask = ~(mask << (7 - bit_position));
+		uint8_t mask = ~(1 << bit_position);
 		v = v & mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is cleared" << std::endl;
@@ -110,8 +108,7 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 1;
-		mask = mask << (7 - bit_position);
+		uint8_t mask = 1 << bit_position;
 		v = v ^ mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is inverted" << std::endl;
