@@ -84,8 +84,8 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 0;
-		mask = (mask | 0b0000001) << (7 - bit_position);
+		uint8_t mask = 1;
+		mask = mask << (7 - bit_position);
 		v = v | mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is set" << std::endl;
@@ -97,8 +97,8 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 0;
-		mask = ~((mask | 0b0000001) << (7 - bit_position));
+		uint8_t mask = 1;
+		mask = ~(mask << (7 - bit_position));
 		v = v & mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is cleared" << std::endl;
@@ -110,8 +110,8 @@ int main()
 
 	{
 		uint8_t v = value;
-		uint8_t mask = 0;
-		mask = (mask | 0b0000001) << (7 - bit_position);
+		uint8_t mask = 1;
+		mask = mask << (7 - bit_position);
 		v = v ^ mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is inverted" << std::endl;
