@@ -41,6 +41,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitwise Operators", "Bitwis
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bitwise Manipulation", "Bitwise Manipulation\Bitwise Manipulation.vcxproj", "{7A6647A9-3500-4EC7-98A4-F7A81692FCD9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Flow Control", "Flow Control\Flow Control.vcxproj", "{4D758E3E-E829-4ABD-A516-401E9DDF5084}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Area Calculator", "Area Calculator\Area Calculator.vcxproj", "{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -201,6 +205,22 @@ Global
 		{7A6647A9-3500-4EC7-98A4-F7A81692FCD9}.Release|x64.Build.0 = Release|x64
 		{7A6647A9-3500-4EC7-98A4-F7A81692FCD9}.Release|x86.ActiveCfg = Release|Win32
 		{7A6647A9-3500-4EC7-98A4-F7A81692FCD9}.Release|x86.Build.0 = Release|Win32
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Debug|x64.ActiveCfg = Debug|x64
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Debug|x64.Build.0 = Debug|x64
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Debug|x86.ActiveCfg = Debug|Win32
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Debug|x86.Build.0 = Debug|Win32
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Release|x64.ActiveCfg = Release|x64
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Release|x64.Build.0 = Release|x64
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Release|x86.ActiveCfg = Release|Win32
+		{4D758E3E-E829-4ABD-A516-401E9DDF5084}.Release|x86.Build.0 = Release|Win32
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Debug|x64.ActiveCfg = Debug|x64
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Debug|x64.Build.0 = Debug|x64
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Debug|x86.ActiveCfg = Debug|Win32
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Debug|x86.Build.0 = Debug|Win32
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Release|x64.ActiveCfg = Release|x64
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Release|x64.Build.0 = Release|x64
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Release|x86.ActiveCfg = Release|Win32
+		{D38C285F-1EB6-4C11-AE1A-1DDF3DA544FE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

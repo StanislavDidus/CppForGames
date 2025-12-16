@@ -85,7 +85,7 @@ int main()
 	{
 		uint8_t v = value;
 		uint8_t mask = 1 << bit_position;
-		v = v | mask;
+		v |= mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is set" << std::endl;
 		std::cout << "New binary value: " << std::bitset<8>(v) << std::endl;
@@ -97,7 +97,7 @@ int main()
 	{
 		uint8_t v = value;
 		uint8_t mask = ~(1 << bit_position);
-		v = v & mask;
+		v &= mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is cleared" << std::endl;
 		std::cout << "New binary value: " << std::bitset<8>(v) << std::endl;
@@ -109,7 +109,7 @@ int main()
 	{
 		uint8_t v = value;
 		uint8_t mask = 1 << bit_position;
-		v = v ^ mask;
+		v ^= mask;
 
 		std::cout << static_cast<int>(bit_position) << "th bit is inverted" << std::endl;
 		std::cout << "New binary value: " << std::bitset<8>(v) << std::endl;
