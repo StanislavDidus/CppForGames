@@ -82,33 +82,66 @@ T stdDev(const std::vector<T>& arr)
 	return sqrt(var_);
 }
 
+template <typename T>
+void sort(std::vector<T>& arr)
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		bool swapped = false;
+
+		for (int j = 0; j < arr.size() - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				std::swap(arr[j], arr[j + 1]);
+				swapped = true;
+			}
+		}
+
+		if (!swapped) return;
+	}
+}
+
 int main()
 {
-	/*std::vector<float> arr;
-
-	for (float i = 0.f; i < 10.f; i += 1.f)
 	{
-		arr.push_back(i);
+		std::vector<int> arr{ 0,15,100,14,-15,0,5,101 };
+		sort(arr);
+		for (int i = 0; i < arr.size(); ++i)
+		{
+			std::cout << arr[i] << std::endl;
+		}
 	}
 
-	std::cout << max(arr) << std::endl;
-	std::cout << min(arr) << std::endl;
-	std::cout << sum(arr) << std::endl;
-	std::cout << mean(arr) << std::endl;
-	std::cout << var(arr) << std::endl;
-	std::cout << stdDev(arr) << std::endl;*/
+	std::cout << "Array was sorted." << std::endl;
 
+	std::cout << "Enter the size of an array: ";
 	int n = readValue<int>();
-
 	while (n <= 0)
 	{
-		std::cerr << "ERROR::Wrong type" << std::endl;
+		std::cerr << "ERROR::Value must be greater than 0" << std::endl;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		n = readValue<int>();
 	}
 
-	std::cout << n << std::endl;
+	std::vector<float> arr;
+	arr.reserve(n);
 
-	std::vector<float> arr(n);
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << "\nType the <" << i << "> element of the array: ";
+		//I use ignore() here because otherwise if I for example type the size of array to be 10.0 then 0 goes here 
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		float value = readValue<float>();
+		arr.push_back(value);
+	}
+
+	std::cout << "\nMax: " << max(arr) << std::endl;
+	std::cout << "Min: " << min(arr) << std::endl;
+	std::cout << "Sum: " << sum(arr) << std::endl;
+	std::cout << "Mean: " << mean(arr) << std::endl;
+	std::cout << "Variance: " << var(arr) << std::endl;
+	std::cout << "Standard deviation: " << stdDev(arr) << std::endl;
 
 	return 0;
 }

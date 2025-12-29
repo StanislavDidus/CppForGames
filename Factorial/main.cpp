@@ -46,9 +46,9 @@ int fib(int value)
 
 int main()
 {
-	std::cout << "Enter the number" << std::endl;
-	unsigned int number = readNumber();
-	std::cout << "Factorial of <" << number << "> is " << factorialOptimized(number) << std::endl;
+	//std::cout << "Enter the number" << std::endl;
+	//unsigned int number = readNumber();
+	//std::cout << "Factorial of <" << number << "> is " << factorialOptimized(number) << std::endl;
 
 	unsigned int number = readNumber();
 	std::cout << "Fib: " << fib(number) << std::endl;
