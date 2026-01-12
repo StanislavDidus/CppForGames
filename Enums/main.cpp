@@ -39,8 +39,8 @@ enum class GameState
 	Highscores
 };
 
-void doMainMenu();
-void doGame();
+//void doMainMenu();
+//void doGame();
 
 int main()
 {
@@ -49,10 +49,10 @@ int main()
 	switch (gameState)
 	{
 	case GameState::MainMenu:
-		doMainMenu();
+		
 		break;
 	case GameState::Game:
-		doGame();
+		
 		break;
 	case GameState::GameOver:
 		break;
