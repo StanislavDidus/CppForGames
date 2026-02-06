@@ -29,8 +29,8 @@ public:
 	Array& operator=(const Array& rhs);
 
 	//Move Semantics
-	Array(Array&& other);
-	Array& operator=(Array&& rhs);
+	Array(Array&& other) noexcept;
+	Array& operator=(Array&& rhs) noexcept;
 
 	//Subscript operator
 	template<typename Self>
@@ -107,7 +107,7 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs)
 }
 
 template<typename T>
-Array<T>::Array(Array&& other) : m_size(other.m_size), m_capacity(other.m_capacity)
+Array<T>::Array(Array&& other) noexcept : m_size(other.m_size), m_capacity(other.m_capacity)
 {
 	m_data = other.m_data;
 
@@ -117,15 +117,20 @@ Array<T>::Array(Array&& other) : m_size(other.m_size), m_capacity(other.m_capaci
 }
 
 template<typename T>
-Array<T>& Array<T>::operator=(Array<T>&& rhs)
+Array<T>& Array<T>::operator=(Array<T>&& rhs) noexcept
 {
 	if (this == &rhs) return *this;
 
-	m_size = rhs.m_size;
+	//Delete original data
+	delete[] m_data;
+
 	m_data = rhs.m_data;
+	m_size = rhs.m_size;
+	m_capacity = rhs.m_capacity;
 
 	rhs.m_data = nullptr;
 	rhs.m_size = 0;
+	rhs.m_capacity = 0;
 
 	return *this;
 }

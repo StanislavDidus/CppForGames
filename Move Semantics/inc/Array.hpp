@@ -14,8 +14,8 @@ struct Array
 	Array& operator=(const Array& rhs);
 
 	// Move semantics.
-	Array(Array&& other);
-	Array& operator=(Array&& rhs);
+	Array(Array&& other) noexcept;
+	Array& operator=(Array&& rhs) noexcept;
 
 	template<typename Self>
 	auto&& operator[](this Self&& self, size_t i);
@@ -64,7 +64,7 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 }
 
 template<typename T>
-inline Array<T>::Array(Array&& other)
+inline Array<T>::Array(Array&& other) noexcept
 	: size(other.size)
 {
 	data = other.data;
@@ -74,7 +74,7 @@ inline Array<T>::Array(Array&& other)
 }
 
 template<typename T>
-Array<T>& Array<T>::operator=(Array&& rhs)
+Array<T>& Array<T>::operator=(Array&& rhs) noexcept
 {
 	if (this == &rhs) return *this;
 

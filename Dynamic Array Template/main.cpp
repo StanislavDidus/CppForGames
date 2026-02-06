@@ -57,7 +57,7 @@ int main()
 		Array<float> vector{ 3, 5.f };
 		Array<float> vector2 = std::move(vector);
 
-		assert(vector2[0] == 5.f && vector.empty());
+		assert(vector2[0] == 5.f && vector.empty());  // NOLINT(bugprone-use-after-move)
 	}
 
 	return 0;
