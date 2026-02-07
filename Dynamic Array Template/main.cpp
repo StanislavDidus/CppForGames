@@ -64,17 +64,19 @@ int main()
 	// Iterator
 	{
 		Array<float> vector{ 3, 10.f };
+		vector[1] = 15.0f;
+		vector[2] = 20.0f;
+
 		auto it = vector.begin();
 		assert(*it == 10.0f);
-
-		vector[1] = 15.0f;
+		
 		++it;
 		assert(*it == 15.0f);
 
 		--it;
 		assert(*it == 10.0f);
 
-		vector[2] = 20.0f;
+		
 		it = vector.end();
 		--it;
 		assert(*it == 20.0f);
