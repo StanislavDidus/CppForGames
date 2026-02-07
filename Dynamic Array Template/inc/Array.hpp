@@ -4,6 +4,42 @@ template<typename T>
 class Array
 {
 public:
+
+	class Iterator
+	{
+	public:
+		Iterator(T* data) : data{data} {}
+
+		T& operator*()
+		{
+			return *data;
+		}
+
+		Iterator& operator++()
+		{
+			++data;
+			return *this;
+		}
+
+		Iterator& operator--()
+		{
+			--data;
+			return *this;
+		}
+
+		bool operator==(const Iterator& rhs) const
+		{
+			return data == rhs.data;
+		}
+
+		bool operator!=(const Iterator& rhs) const
+		{
+			return !(data == rhs.data);
+		}
+	private:
+		T* data;
+	};
+
 	Array() : m_capacity(8)
 	{
 		m_data = new T[m_capacity];
@@ -71,6 +107,16 @@ public:
 	size_t capacity() const
 	{
 		return m_capacity;
+	}
+
+	Iterator begin() const
+	{
+		return Iterator{m_data};
+	}
+
+	Iterator end() const
+	{
+		return Iterator{ m_data + m_size };
 	}
 
 	template<typename Self>
