@@ -50,6 +50,7 @@ inline int parseInt(const char* str, int* result)
 	if (digit_size == 0)
 	{
 		errno = EINVAL;
+		delete[] digits;
 		return -1;
 	}
 
@@ -62,12 +63,14 @@ inline int parseInt(const char* str, int* result)
 		if (number > INT_MAX - temp)
 		{
 			errno = ERANGE;
+			delete[] digits;
 			return -2;
 		}
 		number += temp;
 	}
 
 	*result = negative ? number * -1 : number;
+	delete[] digits;
 	return 0;
 }
 
