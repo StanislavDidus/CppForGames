@@ -1,11 +1,21 @@
 #include <iostream>
 #include <string>
 
+struct Digit
+{
+	int digit;
+	int position;
+};
+
 inline int parseInt(const char* str, int* result)
 {
-	std::string number{};
+	size_t str_len = strlen(str);
+	
+	Digit* digits = new Digit[str_len];
+	size_t digit_size = 0;
+
 	bool negative = false;
-	for (size_t i = 0; i < std::strlen(str); ++i)
+	for (size_t i = 0; i < str_len; ++i)
 	{
 		char current_letter = str[i];
 
@@ -27,36 +37,38 @@ inline int parseInt(const char* str, int* result)
 			break;
 		}
 
-		number += current_letter;
+		digits[digit_size] = Digit{static_cast<int>(current_letter - '0'), 0};
+
+		for (size_t j = 0; j < digit_size; ++j)
+		{
+			digits[j].position++;
+		}
+
+		++digit_size; 
 	}
 
-	// Check for Invalid Input
-	if (number.empty())
+	if (digit_size == 0)
 	{
 		errno = EINVAL;
 		return -1;
 	}
-	else
+
+	int number = 0;
+	for (size_t i = 0; i < digit_size; ++i)
 	{
-		// Check for integer overflow or underflow
-		try
-		{
-			// Store the result in temp so that only valid value is assigned
-			int temp = static_cast<int>(strtol(number.c_str(), nullptr, 10));
-			
-			if (errno == ERANGE)
-				throw std::out_of_range("Integer overflow.");
+		// long so that temp does not overflow
+		long temp = digits[i].digit * pow(10, digits[i].position);
 
-
-			*result = temp;
-			if (negative) *result *= -1;
-			return 0;
-		}	
-		catch (const std::out_of_range& e)
+		if (number > INT_MAX - temp)
 		{
+			errno = ERANGE;
 			return -2;
 		}
+		number += temp;
 	}
+
+	*result = negative ? number * -1 : number;
+	return 0;
 }
 
 inline bool tryParseInt(const char* str, int& result)
