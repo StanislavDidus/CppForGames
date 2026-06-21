@@ -26,7 +26,8 @@ int parseInt(const char* str, int* result)
 		// Stop if encountered more than one sign
 		if ((current_letter == '-' || current_letter == '+') && was_sign)
 		{
-			break;
+			errno = EINVAL;
+			return -1;
 		}
 
 		if (current_letter == '-' && !was_sign)
